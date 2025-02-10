@@ -39,6 +39,7 @@ export interface SidebarTreeNode {
   id: string;
   name: string;
   model: SidebarModel['model'];
+  url?: string;
   sortPriority?: number;
   workspaceId?: string;
   folderId?: string | null;

@@ -37,6 +37,7 @@ export type SidebarItemProps = {
   className?: string;
   itemId: string;
   itemName: string;
+  itemUrl?: string;
   itemModel: AnyModel['model'];
   onMove: (id: string, side: 'above' | 'below') => void;
   onEnd: (id: string) => void;
@@ -55,6 +56,7 @@ type DragItem = {
 
 export const SidebarItem = memo(function SidebarItem({
   itemName,
+  itemUrl,
   itemId,
   itemModel,
   child,
@@ -285,7 +287,10 @@ export const SidebarItem = memo(function SidebarItem({
                 onKeyDown={handleInputKeyDown}
               />
             ) : (
-              <div className="truncate w-full">{itemName}</div>
+              <>
+                <div className="truncate w-full">{itemName}</div>
+                {itemUrl ? <div className="truncate w-full">{itemUrl}</div> : null}
+              </>
             )}
           </div>
           {latestGrpcConnection ? (

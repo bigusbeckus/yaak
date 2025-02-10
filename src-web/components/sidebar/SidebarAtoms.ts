@@ -17,6 +17,7 @@ const allPotentialChildrenAtom = atom((get) => {
   return [...requests, ...folders].map((v) => ({
     id: v.id,
     model: v.model,
+    url: 'url' in v ? v.url : undefined,
     folderId: v.folderId,
     name: resolvedModelName(v),
     workspaceId: v.workspaceId,
@@ -102,13 +103,14 @@ function itemFromModel(
   item: Pick<
     Folder | HttpRequest | GrpcRequest | WebsocketRequest,
     'folderId' | 'model' | 'workspaceId' | 'id' | 'name' | 'sortPriority'
-  >,
+  > & { url?: string },
   depth = 0,
 ): SidebarTreeNode {
   return {
     id: item.id,
     name: item.name,
     model: item.model,
+    url: item.url,
     sortPriority: 'sortPriority' in item ? item.sortPriority : -1,
     workspaceId: item.workspaceId,
     folderId: item.folderId,
